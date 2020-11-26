@@ -1,9 +1,11 @@
-//queue.h
+#ifndef QUEUE_H
+#define QUEUE_H
+
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
-#include <malloc.h>
-#include <time.h>
+#include <string.h>
+#include <stdio.h>
 
 int opt_T;                              // number of threads
 int opt_Q;                              // number of queue items
@@ -39,3 +41,5 @@ void enqueue(TQueue *queue, Task *t);
 Task * dequeue(TQueue *queue);
 
 void * work(void *arg);
+
+#endif
