@@ -1,34 +1,6 @@
 //queue.c
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "queue.h"
 #include "./testpbthreads.h"
-
-int opt_T;                              // number of threads
-int opt_Q;                              // number of queue items
-
-static pthread_mutex_t task_mutex = PTHREAD_MUTEX_INITIALIZER;
-
-typedef struct Task {
-    unsigned char key[256];
-} Task;
-
-typedef struct Cell {
-    Task *t;
-    struct Cell *next;
-} Cell;
-
-typedef struct TQueue {
-    struct Cell *head;
-    struct Cell *tail;
-} TQueue;
-
-typedef struct Thread {
-    pthread_t tid;
-    int xid;
-    TQueue *queue;
-} Thread;
 
 void startQueue(TQueue *queue)
 {
@@ -109,12 +81,12 @@ void *work(void *arg)
             break;
 
         printf("[%.9f/%.9f %5.5d]", tvbef,tvaft - tvbef,tskcur->xid);
-        
-        printf("   %02x", t->key);
+        printf("   %s", t->key);
           
         printf("\n");
     }
 
     return (void *) 0;
 }
+
 
