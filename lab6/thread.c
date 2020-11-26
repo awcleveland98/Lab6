@@ -1,7 +1,7 @@
 //thread.c
-#include <string.h>
 #include "./queue.h"
 #include "./testpbthreads.h"
+#include "./thread.h"
 
 unsigned char  s[256];
 unsigned char  t[256];
@@ -51,10 +51,12 @@ void threads(){
     TQueue *queue;
     Task *t;
     Thread *tsk;
-    FILE *file2 = fopen("/dev/urandom","r");
+
+    FILE *file2 = fopen("/dev/random","r");
     int key_len = 10;
-    unsigned char tkey[key_len];
-    fread(tkey, key_len, 1, file2);
+    unsigned char tkey[ key_len ];
+    for (int i = 0; i < opt_Q; i++)
+        fread(tkey, key_len, 1, file2);
 
     tvzero = tvgetf();
 
@@ -62,7 +64,7 @@ void threads(){
     startQueue(queue);
 
     if (opt_T == 0)
-        opt_T = 10;
+        opt_T = 1;
     Thread threads[opt_T];
 
     if (opt_Q == 0)
@@ -70,7 +72,6 @@ void threads(){
     t = malloc(sizeof(Task) * opt_Q);
 
     for (int i = 0; i < opt_Q; i++) {
-        
         strcpy(t[i].key, tkey);
         enqueue(queue, &t[i]);
     }
