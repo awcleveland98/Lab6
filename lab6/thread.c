@@ -1,7 +1,8 @@
 //thread.c
-#include "./queue.h"
-#include "./testpbthreads.h"
-#include "./thread.h"
+#include "queue.h"
+#include "testpbthreads.h"
+#include "thread.h"
+#include "keygen.h"
 
 unsigned char  s[256];
 unsigned char  t[256];
@@ -46,25 +47,16 @@ void rc4( unsigned char* key,  int key_len,
    }
 }
 
-void threads(){
-    char *cp;
+void threads(unsigned char *tkey, char *sBuff){
     TQueue *queue;
     Task *t;
     Thread *tsk;
-
-    FILE *file2 = fopen("/dev/random","r");
-    int key_len = 10;
-    unsigned char tkey[ key_len ];
-    for (int i = 0; i < opt_Q; i++)
-        fread(tkey, key_len, 1, file2);
-
-    tvzero = tvgetf();
 
     queue = malloc(sizeof(TQueue));
     startQueue(queue);
 
     if (opt_T == 0)
-        opt_T = 1;
+        opt_T = 10;
     Thread threads[opt_T];
 
     if (opt_Q == 0)
@@ -72,7 +64,8 @@ void threads(){
     t = malloc(sizeof(Task) * opt_Q);
 
     for (int i = 0; i < opt_Q; i++) {
-        strcpy(t[i].key, tkey);
+        t[i].key = tkey;
+        t[i].message = sBuff;
         enqueue(queue, &t[i]);
     }
 
@@ -88,7 +81,6 @@ void threads(){
         pthread_join(tsk->tid, NULL);
     }
 
-    printf("TOTAL: %.9f\n",tvgetf());
-
     free(t);
 }
+
