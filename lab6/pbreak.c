@@ -9,7 +9,7 @@ int main(int argc,char ** argv){
 	char sBuff[256];
 	int thrs = 0;
 	if (argc > 1) {
-		FILE *file = fopen(argv[1], "r");
+		FILE *file = fopen(argv[1], "rb");
 		fgets(sBuff, 256, (FILE*)file);
 		fclose(file);
 	}
@@ -27,15 +27,10 @@ int main(int argc,char ** argv){
 		printf("%c", sBuff[i]);
 
 	printf("\n");
-	unsigned char tkey[64];
-	keygen(tkey);
 
-	printf("Original Key: ");
-	for (int i = 0; i < 64; i++)
-	{
-		printf("%02x ", tkey[i]);
-	}
-	printf("\n");
+	unsigned size = 1;
+    	unsigned char* tkey = malloc(sizeof(unsigned char));
+    	tkey[0] = 0;
 
 	threads(tkey, sBuff);
 
