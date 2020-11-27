@@ -15,12 +15,12 @@ else
 	lvl=-O3
 endif
 
-RunEnd=
-def=-DN_KEYS=3 -DN_DECS=6 -DN_VALS=10
-option=$(lvl) $(opt) $(def) -std=c18
+RunEnd= "encodedmessage.txt"
+def=
+option=$(lvl) $(opt) $(def)
 
 obj=.o
-out=bruteForceDecider$(obj)
+out=pbreak$(obj)
 
 #define obj files
 ofiles=$(bin)pbreak$(obj) $(bin)queue$(obj) \
