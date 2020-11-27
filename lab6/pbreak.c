@@ -24,9 +24,9 @@ int main(int argc,char ** argv){
 	printf("Encoded Message: ");
 	int sBuff_len = strlen(sBuff);
 	for (int i=0;i<sBuff_len;i++)
-		printf("%02x", sBuff[i]);
+		printf("%c", sBuff[i]);
 
-
+	printf("\n");
 	unsigned char tkey[64];
 	keygen(tkey);
 
