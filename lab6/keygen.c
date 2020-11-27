@@ -1,12 +1,14 @@
 #include "keygen.h"
 
-void keygen(unsigned char tkey[64]){
-    
-	srand(time(NULL));
-
-	for (int i = 0; i < 64; i++)
-	{
-		tkey[i] = (unsigned char) rand() % 128;
-	}
+void keygen(unsigned char** currentKey, unsigned* outputSize, unsigned increment) {
+    unsigned index = 0;
+    for (int i = 0; i < increment; ++i) {
+        while (++(*currentKey)[index] == 0) {
+            if (++index == *outputSize) {
+                free(*currentKey);
+                *currentKey = calloc(1, ++*outputSize);
+            }
+        }
+    }
 
 }
