@@ -1,6 +1,5 @@
 //queue.c
 #include "queue.h"
-#include "./testpbthreads.h"
 
 void startQueue(TQueue *queue)
 {
@@ -77,16 +76,19 @@ void *work(void *arg)
         if (t == NULL)
             break;
 
-        for (int i = 0; i < 64; i++)
+        for (int i = 0; i < 256; i++)
         {
             printf("%02x", t->key[i]);
         }
-        printf("\n");
+        
+        printf("\n\n");
 
           
     }
 
     return (void *) 0;
 }
+
+
 
 
