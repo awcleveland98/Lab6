@@ -51,6 +51,7 @@ void threads(unsigned char *tkey, char *sBuff){
     TQueue *queue;
     Task *t;
     Thread *tsk;
+    unsigned size = 1;
 
     queue = malloc(sizeof(TQueue));
     startQueue(queue);
@@ -64,6 +65,7 @@ void threads(unsigned char *tkey, char *sBuff){
     t = malloc(sizeof(Task) * opt_Q);
 
     for (int i = 0; i < opt_Q; i++) {
+        keygen(&tkey, &size, 1);
         t[i].key = tkey;
         t[i].message = sBuff;
         enqueue(queue, &t[i]);
@@ -83,4 +85,3 @@ void threads(unsigned char *tkey, char *sBuff){
 
     free(t);
 }
-
