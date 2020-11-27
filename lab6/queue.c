@@ -73,11 +73,6 @@ void *work(void *arg)
     while (1) {
         
         t = dequeue(queue);
-       
-        int sBuff_len = strlen(t->message);
-        printf("message at destination: ");
-	    for (int i=0;i<sBuff_len;i++)
-		    printf("%02x", t->message[i]);
 
         if (t == NULL)
             break;
@@ -90,4 +85,5 @@ void *work(void *arg)
 
     return (void *) 0;
 }
+
 
