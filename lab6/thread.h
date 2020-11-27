@@ -11,6 +11,6 @@ void rc4_init( unsigned char *key, int key_len);
 void rc4( unsigned char* key,  int key_len,
                    char* buff, int len);
 
-void threads();
+void threads(unsigned char *tkey, char *sBuff);
 
 #endif
