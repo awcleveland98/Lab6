@@ -69,24 +69,25 @@ void *work(void *arg)
     Thread *tskcur = arg;
     TQueue *queue = tskcur->queue;
     Task *t;
-    double tvbef;
-    double tvaft;
 
     while (1) {
-        tvbef = tvgetf();
+        
         t = dequeue(queue);
-        tvaft = tvgetf();
+       
+        int sBuff_len = strlen(t->message);
+        printf("message at destination: ");
+	    for (int i=0;i<sBuff_len;i++)
+		    printf("%02x", t->message[i]);
 
         if (t == NULL)
             break;
 
-        printf("[%.9f/%.9f %5.5d]", tvbef,tvaft - tvbef,tskcur->xid);
-        printf("   %s", t->key);
-          
+        printf("%02x", t->key);
         printf("\n");
+
+          
     }
 
     return (void *) 0;
 }
-
 
