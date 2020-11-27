@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void keygen(unsigned char tkey[64]);
+void keygen(unsigned char** currentKey, unsigned* outputSize, unsigned increment);
 
 #endif
