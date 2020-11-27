@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "./thread.h"
-#include "./queue.h"
+#include "thread.h"
+#include "queue.h"
+#include "keygen.h"
 
 int main(int argc,char ** argv){  
 	char sBuff[256];
@@ -25,5 +26,18 @@ int main(int argc,char ** argv){
 	for (int i=0;i<sBuff_len;i++)
 		printf("%02x", sBuff[i]);
 
-	threads();
+
+	unsigned char tkey[64];
+	keygen(tkey);
+
+	printf("Original Key: ");
+	for (int i = 0; i < 64; i++)
+	{
+		printf("%02x ", tkey[i]);
+	}
+	printf("\n");
+
+	threads(tkey, sBuff);
+
 }
+
