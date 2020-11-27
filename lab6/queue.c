@@ -77,7 +77,10 @@ void *work(void *arg)
         if (t == NULL)
             break;
 
-        printf("%02x", t->key);
+        for (int i = 0; i < 64; i++)
+        {
+            printf("%02x", t->key[i]);
+        }
         printf("\n");
 
           
