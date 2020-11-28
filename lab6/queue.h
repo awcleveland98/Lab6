@@ -13,7 +13,7 @@ int opt_Q;                              // number of queue items
 static pthread_mutex_t task_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 typedef struct Task {
-    unsigned char *key;
+    unsigned int *key;
     char *message;
 } Task;
 
@@ -40,8 +40,6 @@ int empty(TQueue *queue);
 void enqueue(TQueue *queue, Task *t);
 
 Task * dequeue(TQueue *queue);
-
-void * work(void *arg);
 
 #endif
 
