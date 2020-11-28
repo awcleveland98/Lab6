@@ -27,12 +27,11 @@ int main(int argc,char ** argv){
 		printf("%c", sBuff[i]);
 
 	printf("\n");
-
-	unsigned size = 1;
-    	unsigned char* tkey = malloc(sizeof(unsigned char));
-    	tkey[0] = 0;
+	
+	
+    unsigned int* tkey = malloc(sizeof(unsigned int) * 64);
+    tkey[0] = 0;
 
 	threads(tkey, sBuff);
-
 }
 
