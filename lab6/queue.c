@@ -63,32 +63,6 @@ Task *dequeue(TQueue *queue)
     return t;
 }
 
-void *work(void *arg)
-{
-    Thread *tskcur = arg;
-    TQueue *queue = tskcur->queue;
-    Task *t;
-
-    while (1) {
-        
-        t = dequeue(queue);
-
-        if (t == NULL)
-            break;
-
-        for (int i = 0; i < 256; i++)
-        {
-            printf("%02x", t->key[i]);
-        }
-        
-        printf("\n\n");
-
-          
-    }
-
-    return (void *) 0;
-}
-
 
 
 
